@@ -1,28 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public float forwardSpeed = 200f;
-    public float sideForce = 200f;
+    public float forwardForce = 2000f;
+    public float sidewaysForce = 200f;
 
-    // Update is called once per frame
-    void Start()
+    void FixedUpdate()
     {
-        rb.velocity = new Vector3(0, 0, forwardSpeed);
-    }
-    void Update()
-    {
-        rb.AddForce(0, 0, forwardSpeed, ForceMode.VelocityChange);
+        rb.AddForce(0, 0, forwardForce * Time.deltaTime);
 
-        if (Input.GetKey("a")) {
-            rb.AddForce(-sideForce, 0, 0, ForceMode.VelocityChange);
+        if (Input.GetKey("d"))
+        {
+            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0);
         }
-        if (Input.GetKey("d")) {
-            rb.AddForce(sideForce, 0, 0, ForceMode.VelocityChange);
+        if (Input.GetKey("a"))
+        {
+            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0);
         }
     }
 }
