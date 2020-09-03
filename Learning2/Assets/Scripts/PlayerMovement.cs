@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey("a"))
         {
             rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+
+        if (rb.position.y < -1) { // if falling off edge
+            FindObjectOfType<GameManager>().EndGame();
+        }
+
+        if (Input.GetKeyDown("escape"))
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 }
